@@ -34,19 +34,15 @@ class GalleryController < ApplicationController
   end
 
   def upload_to_gallery
-    ap params
     ### do we have uploaded portfolio images
     if params[:before] && params[:after]
         bImage = params[:before]
-        aImage = params[:after]
         caption = params[:caption]
-        ap "caption: #{caption}"
         gallery = Gallery.first
         giSet = GalleryImage.new
         giSet.gallery_id = gallery.id
 
         giSet.before.attach(io: File.open(bImage.path), filename: bImage.original_filename, content_type: bImage.content_type)
-        giSet.after.attach(io: File.open(aImage.path), filename: aImage.original_filename, content_type: aImage.content_type)
         giSet.caption = (caption.blank?)? "ARC Expert Work Example" : caption
         giSet.save
     
