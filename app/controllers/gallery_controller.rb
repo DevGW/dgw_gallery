@@ -1,4 +1,5 @@
 class GalleryController < ApplicationController
+class GalleryController < ApplicationController
     before_action :verify_admin
     layout 'admin'
 
@@ -90,5 +91,7 @@ class GalleryController < ApplicationController
     end
   end
 
+
+end
 
 end
