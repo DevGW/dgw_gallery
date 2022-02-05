@@ -1,0 +1,103 @@
+<!-- -------- START HEADER ------- -->
+<header>
+    <div class="page-header min-vh-25 bg-gradient-light"  style="background-image: url('<%= image_path "waves-white.svg" %>'); background-size: contain; background-repeat: repeat-x; background-color: black;" loading="lazy">
+        <span class="mask bg-gradient-dark opacity-3"></span>
+        <div class="d-block d-md-none min-vh-30"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 mx-auto mt-6 text-center">
+                    <h2 class="text-white mt-2">Manage Gallery</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="card card-body border-radius-xl blur shadow-blur mx-3 mx-md-4 mt-n5 overflow-visible">
+    <!-- -------- START Features w/ image on left & title & text & 3 cols on soft background -------- -->
+    <section class="py-3 d-sm-block d-block d-md-block">
+        <div class="container">
+            <div class="row mb-4 mt-n5">
+                <div class="card card-body border-radius-xl col-12">
+                    <div class="row text-center justify-content-center">
+                        <div class="col-12 col-md-12">
+                            <div class="btn-group" role="toolbar" aria-label="Basic example">
+                                <div class="btn-group" role="toolbar" aria-label="Basic example">
+                                    <%= link_to gallery_index_path, class: "text-decoration-none #{(@page == 'gallery')? 'text-danger' : 'text-navy'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
+                                        <i class="far fa-chalkboard-teacher fs-1" ></i>
+                                        <p class="small">Current Gallery</p>
+                                    <% end %>
+                                    <%= link_to gallery_add_path, class: "text-decoration-none #{(@page == 'add')? 'text-danger' : 'text-navy'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "hover focus", "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Porfolio / Work Example images pending approval"} do%>
+                                        <i class="far fa-images fs-1" ></i>
+                                        <p class="small">Add to Gallery</p>
+                                    <% end %>
+                                    <%= link_to gallery_upload_path, class: "text-decoration-none #{(@page == 'upload')? 'text-danger' : 'text-navy'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "hover focus", "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Members awaiting active and visible status"} do%>
+                                        <i class="far fa-upload fs-1" ></i>
+                                        <p class="small">Upload Set</p>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card card-body border-radius-xl col-12">
+                    <div class="text-end text-navy col-12">
+                        <%= paginate @pfiSets, outer_window: 1, inner_window: 1 %>
+                        <%= page_entries_info @pfiSets %>
+                    </div>
+                    <!-- Start updated before and after photo area -->
+                    <div class="row text-center mt-1 d-flex align-items-stretch">
+                        <% @pfiSets.each.with_index(1) do |pfi, idx| %>
+                            <% if !pfi.blank? && pfi.portfolio.user.approvedSet.send("#{pfi.set}") %>
+                                <div class="col-12 col-md-6 mx-auto d-flex" id="<%= pfi.id %>">
+                                    <div class="mt-2 border-radius-xl mb-0">
+                                        <div class="card-header mt-3 mx-auto border-radius-xl p-2 bg-transparent position-relative z-index-2  blur-shadow-image dark-shadow ">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <figure>
+                                                        <%= image_tag pfi.before.variant(resize_to_fill: [300, 300]), class: "img-fluid border-radius-xl" %>
+                                                        <figcaption>Before</figcaption>
+                                                    </figure>
+                                                </div>
+                                                <div class="col-6">
+                                                    <figure>
+                                                        <%= image_tag pfi.after.variant(resize_to_fill: [300, 300]), class: "img-fluid border-radius-xl", id: "after#{idx}" %>
+                                                        <figcaption>After</figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                            <div class="row mx-auto justify-content-center">
+                                                <h5 class="text-center"><%= link_to pfi.caption, "/postcard/#{pfi.portfolio.user_id}" %></h5>
+                                                <button type="button" class="w-auto mt-2 btn btn-sm btn-primary" onclick='addToGallery(<%= pfi.id %>)'>Add to Gallery</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body text-center">
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                    <!-- End updated before and after photo area -->
+                    <div class="text-end text-navy col-12">
+                        <%= paginate @pfiSets, outer_window: 1, inner_window: 1 %>
+                        <%= page_entries_info @pfiSets %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    function addToGallery(id){
+            $.ajax({
+                type: 'PUT',
+                url: '/gallery/add_to_gallery/' + id,
+                success: function(){
+                    $("#"+id).hide('slow', function(){ $target.remove(); });
+                }
+            });
+
+    }
+</script>
