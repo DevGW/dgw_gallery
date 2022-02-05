@@ -1,7 +1,6 @@
 class GalleryController < ApplicationController
-class GalleryController < ApplicationController
-    before_action :verify_admin
-    layout 'admin'
+    # before_action :verify_admin
+    # layout 'admin'
 
   def index
     @page = 'gallery'
@@ -85,13 +84,12 @@ class GalleryController < ApplicationController
 
   
   private
-  def verify_admin
-    if !user_signed_in? || !current_user.admin
-        redirect_to welcome_index_path and return
-    end
-  end
+#   def verify_admin
+#     if !user_signed_in? || !current_user.admin
+#         redirect_to welcome_index_path and return
+#     end
+#   end
 
 
 end
 
-end
