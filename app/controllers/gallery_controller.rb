@@ -12,15 +12,6 @@ class GalleryController < ApplicationController
   def add
     @page = 'add'
 
-    @pfiSets = PortfolioImage.where.not(id: GalleryImage.pluck(:portfolio_images_id).reject {|x| x.nil?}).order('created_at DESC').page(params[:page])
-    ap "pfiSets"
-    ap @pfiSets.count
-    ap @pfiSets.first
-  end
-
-  def upload
-    @page = 'upload'
-
   end
 
   def add_to_gallery
