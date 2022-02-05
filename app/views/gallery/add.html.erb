@@ -35,12 +35,12 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <figure>
-                                                    <%= image_tag "no_image.png", class: "img-fluid border-radius-xl mt-3", width: "300px", height: "300px", id: "before_image" %>
-                                                    <figcaption>Before</figcaption>
+                                                    <%= image_tag "no_image.png", class: "img-fluid border-radius-xl mt-3", width: "300px", height: "300px", id: "g_image" %>
+                                                    <figcaption>Gallery Image</figcaption>
                                                     <div class="text-center mt-3 text-black">
                                                         <span class="btn-file">
-                                                            <%= file_field_tag "before", id: "before" %>
-                                                            <label for="before">
+                                                            <%= file_field_tag "image", id: "image" %>
+                                                            <label for="image">
                                                                 <i class="fs-4 fa fa-camera-retro"></i> Upload After Image
                                                             </label>
                                                         </span>
@@ -83,11 +83,8 @@
         }
 
 
-        $("#before").change(function(){
-            readURL(this, "#before_image");
-        });
-        $("#after").change(function(){
-            readURL(this, "#after_image");
+        $("#images").change(function(){
+            readURL(this, "#g_image");
         });
     });
 </script>
