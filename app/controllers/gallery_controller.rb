@@ -3,9 +3,7 @@ class GalleryController < ApplicationController
 
   def index
     @page = 'gallery'
-    # gallery = Gallery.first
-    # @sets = gallery.gallery_images
-
+    @galleries = Gallery.all
   end
 
   def manage

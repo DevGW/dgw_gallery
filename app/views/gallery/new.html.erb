@@ -1,5 +1,40 @@
-<h1>New Gallery</h1>
-
-<%= render 'form', gallery: @gallery %>
-
-<%= link_to 'Back', galleries_path %>
+<div class="container mt-3">
+    <div class="row mb-4">
+        <div class="card card-body bg-gradient-gallery border-radius-xl shadow-lg border-top-0 col-12">
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-2 align-content-center">
+                            <%= image_tag "dgw_logo.png", class: 'align-content-center', height: "100px" %>
+                        </div>
+                        <div class="col-8 align-content-center h-100">
+                            <div class="row text-center justify-content-center">
+                                <h2 class="text-active">Dev Ghost Writers Gallery</h2>
+                            </div>
+                            <div class="row text-center justify-content-center">
+                                <div class="col-12">
+                                    <div class="btn-group mt-2" role="toolbar" aria-label="Basic example">
+                                        <%= link_to gallery_galleries_path, class: "text-decoration-none #{(@page == 'gallery')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
+                                            <p class="">Galleries</p>
+                                        <% end %>
+                                        <%= link_to gallery_manage_path, class: "text-decoration-none #{(@page == 'gallery')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
+                                            <p class="">Manage Gallery</p>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="card card-body shadow-lg border-1 border-radius-xl col-12">
+            <div class="row">
+                <%= render 'form', gallery: @gallery %>
+            </div>
+            <%= link_to 'Back', galleries_path %>
+        </div>
+    </div>
+</div>

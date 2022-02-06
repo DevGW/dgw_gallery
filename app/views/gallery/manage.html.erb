@@ -1,70 +1,59 @@
-<div class="card card-body border-radius-xl blur shadow-blur mx-3 mx-md-4 mt-n5 overflow-visible">
-    <!-- -------- START Features w/ image on left & title & text & 3 cols on soft background -------- -->
-    <section class="py-3 d-sm-block d-block d-md-block">
-        <div class="container">
-            <div class="row mb-4 mt-n5">
-                <div class="card card-body border-radius-xl col-12">
-                    <div class="row text-center justify-content-center">
-                        <div class="col-12 col-md-12">
-                            <div class="btn-group" role="toolbar" aria-label="Basic example">
-                                <div class="btn-group" role="toolbar" aria-label="Basic example">
-                                    <%= link_to gallery_index_path, class: "text-decoration-none #{(@page == 'gallery')? 'text-danger' : 'text-navy'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
-                                        <i class="far fa-chalkboard-teacher fs-1" ></i>
-                                        <p class="small">Manage Gallery</p>
-                                    <% end %>
-                                    <%= link_to gallery_add_path, class: "text-decoration-none #{(@page == 'add')? 'text-danger' : 'text-navy'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "hover focus", "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Porfolio / Work Example images pending approval"} do%>
-                                        <i class="far fa-images fs-1" ></i>
-                                        <p class="small">Add to Gallery</p>
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
+<div class="container">
+    <div class="row mb-4">
+        <div class="card card-body bg-gradient-gallery border-radius-xl shadow-lg border-top-0 col-12">
+            <div class="row text-center justify-content-center">
+                <div class="col-12 col-md-12">
+                    <div class="btn-group mt-2" role="toolbar" aria-label="Basic example">
+                        <%= link_to gallery_galleries_path, class: "text-decoration-none #{(@page == 'galleries')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
+                            <p class="">Galleries</p>
+                        <% end %>
+                        <%= link_to gallery_manage_path, class: "text-decoration-none #{(@page == 'manage')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
+                            <p class="">Manage Gallery</p>
+                        <% end %>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="card card-body border-radius-xl col-12">
-                    <div class="row text-center justify-content-center">
-                        <h4>Add Image to Gallery</h4>
-                    </div>
-                    <div class="row text-center mt-1 d-flex align-items-stretch">
-                        <div class="col-12 col-md-8 mx-auto">
-                            <div class="mt-2 border-radius-xl mb-0">
-                                <div class="card-header mt-3 mx-auto border-radius-xl p-2 bg-transparent position-relative z-index-2  blur-shadow-image dark-shadow ">
-                                    <%= form_tag gallery_upload_path, id: "gallery_upload_form", name: "gallery_upload_form", method:"PUT", multipart: true do %>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <figure>
-                                                    <%= image_tag "no_image.png", class: "img-fluid border-radius-xl mt-3", width: "300px", height: "300px", id: "g_image" %>
-                                                    <figcaption>Gallery Image</figcaption>
-                                                    <div class="text-center mt-3 text-black">
-                                                        <span class="btn-file">
-                                                            <%= file_field_tag "image", id: "image" %>
-                                                            <label for="image">
-                                                                <i class="fs-4 fa fa-camera-retro"></i> Upload After Image
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                </figure>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card card-body border-1 shadow-xl border-radius-xl col-12">
+            <div class="row text-center justify-content-center">
+                <h4>Add Image to Gallery</h4>
+            </div>
+            <div class="row text-center mt-1 d-flex align-items-stretch">
+                <div class="col-12 mx-auto">
+                    <div class="mt-2 border-radius-xl mb-0">
+                        <div class="card-header mt-3 mx-auto border-radius-xl p-2 bg-transparent position-relative z-index-2  blur-shadow-image dark-shadow ">
+                            <%= form_tag gallery_upload_path, id: "gallery_upload_form", name: "gallery_upload_form", method:"PUT", multipart: true do %>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <figure>
+                                            <%= image_tag "no_image.png", class: "img-fluid border-radius-xl mt-3", width: "300px", height: "300px", id: "g_image" %>
+                                            <figcaption>Gallery Image</figcaption>
+                                            <div class="text-center mt-3 text-black">
+                                                <span class="btn-file">
+                                                    <%= file_field_tag "image", id: "image" %>
+                                                    <label for="image">
+                                                        <i class="fs-4 fa fa-camera-retro"></i> Upload After Image
+                                                    </label>
+                                                </span>
                                             </div>
-                                        </div>
-                                        <div class="row mx-auto justify-content-center">
-                                            <%= text_field_tag "caption", nil, class: "form-control w-50 text-center", placeholder: "Enter caption for image", required: false %><br>
-                                            <p>
-                                                <button type="submit" class="w-auto mt-2 btn btn-sm btn-primary">Add to Gallery</button>
-                                            </p>
-                                        </div>
-                                    <% end %>
+                                        </figure>
+                                    </div>
                                 </div>
-                                <div class="card-body text-center">
+                                <div class="row mx-auto justify-content-center">
+                                    <%= text_field_tag "caption", nil, class: "form-control w-50 text-center", placeholder: "Enter caption for image", required: false %><br>
+                                    <p>
+                                        <button type="submit" class="w-auto mt-2 btn btn-sm btn-primary">Add to Gallery</button>
+                                    </p>
                                 </div>
-                            </div>
+                            <% end %>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
 <script>
     $(document).ready(function() {
