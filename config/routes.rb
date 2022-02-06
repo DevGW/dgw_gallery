@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  resources :gallery
   get 'gallery', controller: 'gallery', action: 'galleries'
-  get 'gallery/galleries'
   get 'gallery/manage'
   put "gallery/add_to_gallery/:id", controller: 'gallery', action: 'add_to_gallery'
   put "gallery/remove_from_gallery/:id", controller: 'gallery', action: 'remove_from_gallery'

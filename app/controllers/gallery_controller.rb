@@ -1,6 +1,5 @@
 class GalleryController < ApplicationController
-    # before_action :verify_admin
-    # layout 'admin'
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy]
 
   def index
     @page = 'gallery'
@@ -70,13 +69,48 @@ class GalleryController < ApplicationController
   end
 
   
-  private
-#   def verify_admin
-#     if !user_signed_in? || !current_user.admin
-#         redirect_to welcome_index_path and return
-#     end
-#   end
 
+  # GET /gallery/new
+  def new
+    @gallery = Gallery.new
+  end
+
+  # POST /gallery
+  def create
+    @gallery = Gallery.new(gallery_params)
+
+    if @gallery.save
+      redirect_to @gallery, notice: 'Gallery was successfully created.'
+    else
+      render :new
+    end
+  end
+
+  # PATCH/PUT /gallery/1
+  def update
+    if @gallery.update(gallery_params)
+      redirect_to @gallery, notice: 'Gallery was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  # DELETE /gallery/1
+  def destroy
+    @gallery.destroy
+    redirect_to gallery_url, notice: 'Gallery was successfully destroyed.'
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_gallery
+      @gallery = Gallery.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def gallery_params
+      params.fetch(:gallery, {})
+    end
 
 end
 
