@@ -4,10 +4,18 @@
 # end
 
   namespace :dgw_gallery do
-    desc "Install Gallery View Files"
+    desc "Install Gallery Items"
+
     task :install_views do
         source = File.join(DgwGallery::Engine.root, "app", "views", "gallery")
         target = File.join(Rails.root, "app", "views", "gallery")
         FileUtils.copy_entry source, target
     end
+
+    task :install_controller do
+        source = File.join(DgwGallery::Engine.root, "app", "controllers", "gallery_controller.rb")
+        target = File.join(Rails.root, "app", "controllers", "gallery_controller.rb")
+        FileUtils.cp_r source, target
+    end
+
 end
