@@ -10,4 +10,4 @@
     target = File.join(Rails.root, "views", "gallery", "index.html.erb")
     FileUtils.cp_r source, target
   end
-end
+# end

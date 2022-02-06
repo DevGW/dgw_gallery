@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dgw_gallery (0.1.17)
+    dgw_gallery (0.1.18)
       rails (~> 6.1.4, >= 6.1.4.4)
 
 GEM
