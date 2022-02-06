@@ -6,8 +6,8 @@
   namespace :dgw_gallery do
     desc "Install Gallery View Files"
     task :install_views do
-        source = File.join(DgwGallery::Engine.root, "app", "views", "gallery", "index.html.erb")
-        target = File.join(Rails.root, "app", "views", "gallery", "index.html.erb")
-        FileUtils.cp_r source, target
+        source = File.join(DgwGallery::Engine.root, "app", "views", "gallery")
+        target = File.join(Rails.root, "app", "views")
+        FileUtils.copy_entry source, target
     end
 end
