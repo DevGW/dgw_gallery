@@ -7,7 +7,7 @@
     desc "Install Gallery View Files"
     task :install_views do
         source = File.join(DgwGallery::Engine.root, "app", "views", "gallery")
-        target = File.join(Rails.root, "app", "views")
+        target = File.join(Rails.root, "app", "views", "gallery")
         FileUtils.copy_entry source, target
     end
 end
