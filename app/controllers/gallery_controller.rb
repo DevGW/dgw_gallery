@@ -1,5 +1,5 @@
 class GalleryController < ApplicationController
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy]
+  before_action :set_gallery, only: [:manage, :update, :destroy]
 
   def index
     @page = 'gallery'
