@@ -9,7 +9,7 @@ class GalleryController < ApplicationController
 
   end
 
-  def add
+  def manage
     @page = 'add'
 
   end
