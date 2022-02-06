@@ -5,7 +5,7 @@
             <div class="row text-center justify-content-center">
                 <div class="col-12 col-md-12">
                     <div class="btn-group mt-2" role="toolbar" aria-label="Basic example">
-                        <%= link_to gallery_index_path, class: "text-decoration-none #{(@page == 'galleries')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
+                        <%= link_to gallery_path, class: "text-decoration-none #{(@page == 'galleries')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
                             <p class="">Galleries</p>
                         <% end %>
                         <%= link_to gallery_manage_path, class: "text-decoration-none #{(@page == 'manage')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
@@ -26,6 +26,7 @@
                     <div class="mt-2 border-radius-xl mb-0">
                         <div class="card-header mt-3 mx-auto border-radius-xl p-2 bg-transparent position-relative z-index-2  blur-shadow-image dark-shadow ">
                             <%= form_tag gallery_upload_path, id: "gallery_upload_form", name: "gallery_upload_form", method:"PUT", multipart: true do %>
+                                <%= hidden_field_tag "gallery_id", @gallery.id %>
                                 <div class="row">
                                     <div class="col-12">
                                         <figure>

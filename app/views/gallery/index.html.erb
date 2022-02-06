@@ -3,28 +3,12 @@
     <div class="row mb-4">
         <div class="card card-body bg-gradient-gallery border-radius-xl shadow-lg border-top-0 col-12">
             <div class="row justify-content-center">
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-2 align-content-center">
-                            <%= image_tag "dgw_logo.png", class: 'align-content-center', height: "100px" %>
-                        </div>
-                        <div class="col-8 align-content-center h-100">
-                            <div class="row text-center justify-content-center">
-                                <h2 class="text-active">Dev Ghost Writers Gallery</h2>
-                            </div>
-                            <div class="row text-center justify-content-center">
-                                <div class="col-12">
-                                    <div class="btn-group mt-2" role="toolbar" aria-label="Basic example">
-                                        <%= link_to gallery_index_path, class: "text-decoration-none #{(@page == 'gallery')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
-                                            <p class="">Galleries</p>
-                                        <% end %>
-                                        <%= link_to gallery_manage_path, class: "text-decoration-none #{(@page == 'gallery')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
-                                            <p class="">Manage Gallery</p>
-                                        <% end %>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-6 justify-content-center d-flex align-items-center">
+                    <div class="col-2 d-flex align-items-center">
+                        <%= image_tag "dgw_logo.png", class: 'align-items-center', height: "100px" %>
+                    </div>
+                    <div class="col-8 d-flex align-items-center h-100">
+                        <h2 class="text-active">Dev Ghost Writers Gallery</h2>
                     </div>
                 </div>
             </div>
@@ -34,43 +18,34 @@
         <div class="card card-body shadow-lg border-1 border-radius-xl col-12">
             <div class="row">
                 <% if @galleries.count > 0 %>
-                    <div class="container">
-                        <div class="row d-none d-md-block border-radius-md pb-4 p-3 mx-sm-0 mx-1 position-relative">
-                            <div class="col-12 mx-auto">
-                                <div class=" mt-md-0 mt-5 border-radius-xl mb-4">
-                                    <div class="card-header mt-3 border-radius-xl bg-transparent position-relative z-index-2  blur-shadow-image dark-shadow">
-                                        <div class="row text-center mb-2">
-                                            <h4>Existing Galleries</h4>
+                    <div class="row justify-space-between py-2">
+                        <% @galleries.each do |gallery| %>
+                            <div class="col-12 col-md-3 mx-auto mb-5 move-on-hover d-flex align-items-stretch">
+                                <%= link_to "/gallery/manage/#{gallery.id}", class: "text-decoration-none" do %>
+                                    <div class="card border-1 shadow-lg mt-3 border-radius-xl">
+                                        <div class="card-header mt-n3 mx-3 p-0 bg-transparent position-relative z-index-2">
+                                            <span class="d-block blur-shadow-image">
+                                                <%= image_tag ((!gallery.gallery_images.blank? && gallery.gallery_images.first.image.attached?)? gallery.gallery_images.first.image.variant(resize_to_fill: [300, 300]) : "no_image.png"), class: "img-fluid border-radius-xl" %>
+                                            </span>
                                         </div>
-                                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                                            <div class="carousel-inner">
-                                                <% @galleries.each_with_index do |gallery, idx| %>
-                                                    <div  data-bs-interval="5000" class="carousel-item carousel-item-why <%= (idx == 0)? "active" : nil %>">
-                                                        <div class="row col-md-12 mx-auto">
-                                                            <div class="col-md-6">
-                                                                <% if !gallery.gallery_images.blank? && gallery.gallery_images.first.image.attached? %>
-                                                                    <%= image_tag gallery.gallery_images.first.image.variant(resize_to_fill: [600, 400]), class: "img-fluid border-radius-xl" %>
-                                                                <% end %>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row col-md-12 justify-content-center">
-                                                            <figcaption class="blockquote-footer text-center">
-                                                                <%= gallery.title %>
-                                                            </figcaption>
-                                                        </div>
-                                                    </div>
-                                                <% end %>
+                                        <div class="card-body p-1 text-center">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <p class="text-black"><%= gallery.title %></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <% end %>
                             </div>
-                        </div>
+                        <% end %>
                     </div>
                 <% else %>
                     <div class="col-12 text-center">
                         <h3>You currently have no galleries</h3>
-                        <%= button_tag "Create a Gallery", class: 'btn btn-info border-radius-lg mt-2' %>
+                        <%= link_to gallery_new_path do %>
+                            <%= button_tag "Create a Gallery", class: 'btn btn-info border-radius-lg mt-2' %>
+                        <% end %>
                     </div>
                 <% end %>
             </div>

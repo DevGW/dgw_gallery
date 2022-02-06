@@ -1,5 +1,5 @@
 class GalleryController < ApplicationController
-  before_action :set_gallery, only: [:manage, :update, :destroy]
+  before_action :set_gallery, only: [:show, :manage, :update, :destroy]
 
   def index
     @page = 'gallery'
@@ -7,7 +7,12 @@ class GalleryController < ApplicationController
   end
 
   def manage
-    @page = 'add'
+    @page = 'manage'
+    if params[:id]
+        @gallery = Gallery.find(params[:id])
+    else
+        redirect_to gallery_path and return
+    end
 
   end
 
@@ -32,21 +37,21 @@ class GalleryController < ApplicationController
 
   def upload_to_gallery
     ### do we have uploaded portfolio images
-    if params[:before] && params[:after]
-        bImage = params[:before]
+    if params[:image] && params[:gallery_id]
+        image = params[:image]
         caption = params[:caption]
-        gallery = Gallery.first
-        giSet = GalleryImage.new
-        giSet.gallery_id = gallery.id
+        gallery = Gallery.find(params[:gallery_id])
+        gImage = GalleryImage.new
+        gImage.gallery_id = gallery.id
 
-        giSet.before.attach(io: File.open(bImage.path), filename: bImage.original_filename, content_type: bImage.content_type)
-        giSet.caption = (caption.blank?)? "ARC Expert Work Example" : caption
-        giSet.save
+        gImage.image.attach(io: File.open(image.path), filename: image.original_filename, content_type: image.content_type)
+        gImage.caption = (caption.blank?)? "ARC Expert Work Example" : caption
+        gImage.save
     
-        flash[:success] = "Image set was successfully added to the gallery"
+        flash[:success] = "Image was successfully added to the gallery"
         redirect_back(fallback_location: gallery_path) and return
     else
-        flash[:error] = "Please upload iamges in sets."
+        flash[:error] = "Something went wrong... what did you do?!"
         redirect_back(fallback_location: gallery_path) and return
 
     end
@@ -66,7 +71,9 @@ class GalleryController < ApplicationController
 
   end
 
-  
+  def show
+
+  end
 
   # GET /gallery/new
   def new
@@ -107,7 +114,8 @@ class GalleryController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def gallery_params
-      params.fetch(:gallery, {})
+    #   params.fetch(:gallery, :title, {})
+      params.require(:gallery).permit(:title)
     end
 
 end

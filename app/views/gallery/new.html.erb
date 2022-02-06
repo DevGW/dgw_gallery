@@ -15,7 +15,7 @@
                             <div class="row text-center justify-content-center">
                                 <div class="col-12">
                                     <div class="btn-group mt-2" role="toolbar" aria-label="Basic example">
-                                        <%= link_to gallery_index_path, class: "text-decoration-none #{(@page == 'gallery')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
+                                        <%= link_to gallery_path, class: "text-decoration-none #{(@page == 'gallery')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
                                             <p class="">Galleries</p>
                                         <% end %>
                                         <%= link_to gallery_manage_path, class: "text-decoration-none #{(@page == 'gallery')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
@@ -35,7 +35,7 @@
             <div class="row">
                 <%= render 'form', gallery: @gallery %>
             </div>
-            <%= link_to 'Back', galleries_path %>
+            <%= link_to 'Cancel', gallery_path %>
         </div>
     </div>
 </div>
