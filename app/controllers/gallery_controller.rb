@@ -66,8 +66,8 @@ class GalleryController < ApplicationController
         redirect_back(fallback_location: admin_gallery_path) and return
     end
 
-    rmSet = GalleryImage.find(params[:id])
-    rmSet.destroy
+    rmImage = GalleryImage.find(params[:id])
+    rmImage.destroy
 
   end
 

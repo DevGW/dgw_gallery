@@ -1,15 +1,23 @@
 <%= stylesheet_link_tag "dgw_gallery/dgw_gallery_style.css" %>
-<div class="container">
+<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+<div class="container mt-3">
     <div class="row mb-4">
         <div class="card card-body bg-gradient-gallery border-radius-xl shadow-lg border-top-0 col-12">
+            <div class="row justify-content-center">
+                <div class="col-6 justify-content-center d-flex align-items-center">
+                    <div class="col-2 d-flex align-items-center">
+                        <%= image_tag "dgw_logo.png", class: 'align-items-center', height: "100px" %>
+                    </div>
+                    <div class="col-8 d-flex align-items-center h-100">
+                        <h2 class="text-active">DevGW Gallery <span class="fs-5">(v <%= DgwGallery::VERSION %>)</span></h2>
+                    </div>
+                </div>
+            </div>
             <div class="row text-center justify-content-center">
-                <div class="col-12 col-md-12">
-                    <div class="btn-group mt-2" role="toolbar" aria-label="Basic example">
-                        <%= link_to gallery_path, class: "text-decoration-none #{(@page == 'galleries')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
-                            <p class="">Galleries</p>
-                        <% end %>
-                        <%= link_to gallery_manage_path, class: "text-decoration-none #{(@page == 'manage')? 'text-active' : 'text-black'} mx-1 mx-md-5 position-relative overflow-visible", data: {"bs-container" => "body", "bs-toggle" => "popover", "bs-trigger" => "click hover focus", html: true, sanitize: false, "bs-placement" => "top", "bs-title" => "Pending Approval", "bs-content" => "Main profile images pending approval"} do%>
-                            <p class="">Manage Gallery</p>
+                <div class="col-12">
+                    <div class="btn-group" role="toolbar" aria-label="Basic example">
+                        <%= link_to gallery_path do %>
+                            <%= button_tag "Back to Gallery Home", type: 'button', class: 'btn btn-primary btn-small' %>
                         <% end %>
                     </div>
                 </div>
@@ -23,37 +31,72 @@
             </div>
             <div class="row text-center mt-1 d-flex align-items-stretch">
                 <div class="col-12 mx-auto">
-                    <div class="mt-2 border-radius-xl mb-0">
-                        <div class="card-header mt-3 mx-auto border-radius-xl p-2 bg-transparent position-relative z-index-2  blur-shadow-image dark-shadow ">
-                            <%= form_tag gallery_upload_path, id: "gallery_upload_form", name: "gallery_upload_form", method:"PUT", multipart: true do %>
-                                <%= hidden_field_tag "gallery_id", @gallery.id %>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <figure>
-                                            <%= image_tag "no_image.png", class: "img-fluid border-radius-xl mt-3", width: "300px", height: "300px", id: "g_image" %>
-                                            <figcaption>Gallery Image</figcaption>
-                                            <div class="text-center mt-3 text-black">
+                    <div class="card-header mt-1 mx-auto border-radius-xl p-2 bg-transparent position-relative z-index-2  blur-shadow-image dark-shadow ">
+                        <%= form_tag gallery_upload_path, id: "gallery_upload_form", name: "gallery_upload_form", method:"PUT", multipart: true do %>
+                            <%= hidden_field_tag "gallery_id", @gallery.id %>
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-2">
+                                    <figure>
+                                        <%= image_tag "no_image_selected.png", class: "img-fluid border-radius-xl mt-1", width: "150px", height: "150px", id: "g_image" %>
+                                        <figcaption>
+                                            <div class="text-center mt-1 text-black">
                                                 <span class="btn-file">
                                                     <%= file_field_tag "image", id: "image" %>
                                                     <label for="image">
-                                                        <i class="fs-4 fa fa-camera-retro"></i> Upload After Image
+                                                        <i class="fs-4 fa fa-camera-retro"></i>
+                                                        <p>upload</p>
                                                     </label>
                                                 </span>
                                             </div>
-                                        </figure>
-                                    </div>
+                                        </figcaption>
+                                    </figure>
                                 </div>
-                                <div class="row mx-auto justify-content-center">
-                                    <%= text_field_tag "caption", nil, class: "form-control w-50 text-center", placeholder: "Enter caption for image", required: false %><br>
+                                <div class="col-2">
+                                    <div class="input-group input-group-static mb-2">
+                                        <%= text_field_tag "caption", nil, class: "form-control text-center", placeholder: "Enter caption for image", required: false %><br>
+                                    </div>
                                     <p>
                                         <button type="submit" class="w-auto mt-2 btn btn-sm btn-primary">Add to Gallery</button>
                                     </p>
                                 </div>
-                            <% end %>
-                        </div>
+                            </div>
+                        <% end %>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="card card-body border-1 shadow-xl border-radius-xl col-12">
+            <% if @gallery.gallery_images.count > 0 %>
+                <div class="row justify-space-between py-2 text-center">
+                    <h4 class="text-center">Images in gallery: <%= @gallery.title %></h4>
+                    <hr class="">
+                    <% @gallery.gallery_images.each do |gImage| %>
+                        <div class="col-12 col-md-3 mx-auto mb-5 move-on-hover d-flex align-items-stretch">
+                            <div class="card border-1 shadow-lg mt-3 border-radius-xl">
+                                <div class="card-header mt-n3 mx-3 p-0 bg-transparent position-relative z-index-2">
+                                    <span class="d-block blur-shadow-image">
+                                        <%= image_tag gImage.image.variant(resize_to_fill: [300, 300]), class: "img-fluid border-radius-xl" %>
+                                    </span>
+                                </div>
+                                <div class="card-body p-1 text-center">
+                                    <div class="row">
+                                        <div class="text-black inline-block"><%= gImage.caption %></div>
+                                        <div class="col-12 text-center">
+                                            <%= button_tag "Remove Image", class: 'btn btn-danger btn-sm', onclick: "removeFromGallery(#{gImage.id})", data: {confirm: "Are you sure?\n\nThis will permanently remove the image."} %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            <% else %>
+                <div class="col-12 text-center">
+                    <h3>You currently have no gallery images</h3>
+                </div>
+            <% end %>
         </div>
     </div>
 </div>
@@ -78,4 +121,16 @@
             readURL(this, "#g_image");
         });
     });
+</script>
+<script>
+    function removeFromGallery(id){
+            $.ajax({
+                type: 'PUT',
+                url: '/gallery/remove_from_gallery/' + id,
+                success: function(){
+                    $("#"+id).hide('slow', function(){ $target.remove(); });
+                }
+            });
+
+    }
 </script>

@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "dgw_gallery/dgw_gallery_style.css" %>
+<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 <div class="container mt-3">
     <div class="row mb-4">
         <div class="card card-body bg-gradient-gallery border-radius-xl shadow-lg border-top-0 col-12">
@@ -8,7 +9,14 @@
                         <%= image_tag "dgw_logo.png", class: 'align-items-center', height: "100px" %>
                     </div>
                     <div class="col-8 d-flex align-items-center h-100">
-                        <h2 class="text-active">Dev Ghost Writers Gallery</h2>
+                        <h2 class="text-active">DevGW Gallery <span class="fs-5">(v <%= DgwGallery::VERSION %>)</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center justify-content-center">
+                <div class="col-12">
+                    <div class="btn-group mt-2 mb-3" role="toolbar" aria-label="Basic example">
+                        <span class="text-active">Gallery Home</span>
                     </div>
                 </div>
             </div>
@@ -18,14 +26,19 @@
         <div class="card card-body shadow-lg border-1 border-radius-xl col-12">
             <div class="row">
                 <% if @galleries.count > 0 %>
-                    <div class="row justify-space-between py-2">
+                    <div class="row justify-space-between py-2 text-center">
+                        <h4 class="text-center">Existing Galleries</h4>
+                        <hr class="">
+                        <%= link_to gallery_new_path, class: 'text-end text-info' do %>
+                            <span class="mb-5 text-end"><i class="fa fa-plus"></i> New Gallery</span>
+                        <% end %>
                         <% @galleries.each do |gallery| %>
                             <div class="col-12 col-md-3 mx-auto mb-5 move-on-hover d-flex align-items-stretch">
                                 <%= link_to "/gallery/manage/#{gallery.id}", class: "text-decoration-none" do %>
                                     <div class="card border-1 shadow-lg mt-3 border-radius-xl">
                                         <div class="card-header mt-n3 mx-3 p-0 bg-transparent position-relative z-index-2">
                                             <span class="d-block blur-shadow-image">
-                                                <%= image_tag ((!gallery.gallery_images.blank? && gallery.gallery_images.first.image.attached?)? gallery.gallery_images.first.image.variant(resize_to_fill: [300, 300]) : "no_image.png"), class: "img-fluid border-radius-xl" %>
+                                                <%= image_tag ((!gallery.gallery_images.blank? && gallery.gallery_images.first.image.attached?)? gallery.gallery_images.first.image.variant(resize_to_fill: [300, 300]) : "no_gallery_images.png"), class: "img-fluid border-radius-xl" %>
                                             </span>
                                         </div>
                                         <div class="card-body p-1 text-center">
