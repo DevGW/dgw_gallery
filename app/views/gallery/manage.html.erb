@@ -73,7 +73,7 @@
                     <h4 class="text-center">Images in gallery: <%= @gallery.title %></h4>
                     <hr class="">
                     <% @gallery.gallery_images.each do |gImage| %>
-                        <div class="col-12 col-md-3 mx-auto mb-5 move-on-hover d-flex align-items-stretch">
+                        <div class="col-12 col-md-3 mx-auto mb-5 move-on-hover d-flex align-items-stretch" id="<%= gImage.id %>">
                             <div class="card border-1 shadow-lg mt-3 border-radius-xl">
                                 <div class="card-header mt-n3 mx-3 p-0 bg-transparent position-relative z-index-2">
                                     <span class="d-block blur-shadow-image">

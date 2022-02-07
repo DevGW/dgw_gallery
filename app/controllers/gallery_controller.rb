@@ -60,15 +60,22 @@ class GalleryController < ApplicationController
 
   end
 
+  def remove_gallery
+    if !params[:id]
+        redirect_to gallery_path and return
+    end
+
+    gallery = Gallery.find(params[:id])
+    gallery.destroy
+  end
 
   def remove_from_gallery
     if !params[:id]
-        redirect_back(fallback_location: admin_gallery_path) and return
+        redirect_back(fallback_location: gallery_path) and return
     end
 
     rmImage = GalleryImage.find(params[:id])
     rmImage.destroy
-
   end
 
   def show

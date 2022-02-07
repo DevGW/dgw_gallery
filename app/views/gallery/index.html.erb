@@ -33,23 +33,27 @@
                             <span class="mb-5 text-end"><i class="fa fa-plus"></i> New Gallery</span>
                         <% end %>
                         <% @galleries.each do |gallery| %>
-                            <div class="col-12 col-md-3 mx-auto mb-5 move-on-hover d-flex align-items-stretch">
-                                <%= link_to "/gallery/manage/#{gallery.id}", class: "text-decoration-none" do %>
-                                    <div class="card border-1 shadow-lg mt-3 border-radius-xl">
-                                        <div class="card-header mt-n3 mx-3 p-0 bg-transparent position-relative z-index-2">
-                                            <span class="d-block blur-shadow-image">
-                                                <%= image_tag ((!gallery.gallery_images.blank? && gallery.gallery_images.first.image.attached?)? gallery.gallery_images.first.image.variant(resize_to_fill: [300, 300]) : "no_gallery_images.png"), class: "img-fluid border-radius-xl" %>
-                                            </span>
-                                        </div>
-                                        <div class="card-body p-1 text-center">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <p class="text-black"><%= gallery.title %></p>
-                                                </div>
+                            <div class="col-12 col-md-3 mt-3 mx-auto mb-5 move-on-hover d-flex align-items-stretch" id="<%= gallery.id.to_s %>">
+                                <div class="card border-1 shadow-lg mt-3 border-radius-xl">
+                                    <div class="card-header mt-n3 mx-3 p-0 bg-transparent position-relative z-index-2">
+                                        <span class="d-block blur-shadow-image">
+                                            <%= image_tag ((!gallery.gallery_images.blank? && gallery.gallery_images.first.image.attached?)? gallery.gallery_images.first.image.variant(resize_to_fill: [300, 300]) : "no_gallery_images.png"), class: "img-fluid border-radius-xl" %>
+                                        </span>
+                                    </div>
+                                    <div class="card-body p-1 text-center">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="text-black"><%= gallery.title %></p>
+                                            </div>
+                                            <div class="col-12 text-center">
+                                                <%= button_tag "Remove", class: 'btn btn-danger btn-sm', onclick: "removeGallery(#{gallery.id})", data: {confirm: "Are you sure?\n\nThis will permanently remove the gallery and all attached images."} %>
+                                                <%= link_to "/gallery/manage/#{gallery.id}", class: "text-decoration-none" do %>
+                                                    <%= button_tag "Manage", class: 'btn btn-info btn-sm' %>
+                                                <% end %>
                                             </div>
                                         </div>
                                     </div>
-                                <% end %>
+                                </div>
                             </div>
                         <% end %>
                     </div>
@@ -66,10 +70,10 @@
     </div>
 </div>
 <script>
-    function removeFromGallery(id){
+    function removeGallery(id){
             $.ajax({
-                type: 'PUT',
-                url: '/gallery/remove_from_gallery/' + id,
+                type: 'put',
+                url: '/gallery/remove/' + id,
                 success: function(){
                     $("#"+id).hide('slow', function(){ $target.remove(); });
                 }

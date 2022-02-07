@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dgw_gallery (0.2.1)
+    dgw_gallery (0.2.2)
       image_processing (~> 1.2)
       rails (~> 6.1.4, >= 6.1.4.4)
 
