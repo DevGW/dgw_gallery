@@ -1,28 +1,22 @@
-<!-- Start updated before and after photo area -->
-<div class="row text-center mt-3 d-flex align-items-stretch">
-    <% if !@gallery.gallery_images.blank? %>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-inner">
-                <% @gallery.gallery_images.each do |gi, idx| %>
-                    <div  data-bs-interval="5000" class="carousel-item carousel-item-why <%= (idx == 0)? "active" : nil %>">
-                        <div class="row col-md-12 mx-auto">
-                            <div class="col-md-6">
-                                <%= image_tag gi.image.variant(resize_to_fill: [600, 400]), class: "img-fluid border-radius-xl" %>
-                            </div>
-                        </div>
-                        <div class="row col-md-12 justify-content-center">
-                            <figcaption class="blockquote-footer text-center">
-                                <%= gi.caption %>
-                            </figcaption>
-                        </div>
-                    </div>
-                <% end %>
-            </div>
+<!-- Start Embeded Gallery Area -->
+<% if !@gallery.gallery_images.blank? %>
+    <div id="dgwGalleryIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <% @gallery.gallery_images.each_with_index do |gi, idx| %>
+                <div  data-bs-interval="5000" class="carousel-item <%= (idx == 0)? "active" : nil %>">
+                    <figure>
+                        <%= image_tag gi.image.variant(resize_to_fill: [900, 500]), class: "img-fluid border-radius-xl" %>
+                    </figure>
+                    <figcaption class="blockquote-footer text-center">
+                        <%= gi.caption %>
+                    </figcaption>
+                </div>
+            <% end %>
         </div>
-    <% else %>
-        <div class="col-12 text-center">
-            There Are No Slides to Display. Please add some.
-        </div>
-    <% end %>
-</div>
-<!-- End updated before and after photo area -->
+    </div>
+<% else %>
+    <div class="col-12 text-center">
+        There Are No Slides to Display. Please add some.
+    </div>
+<% end %>
+<!-- End Embeded Gallery Area -->
