@@ -11,10 +11,14 @@ Add this line to your application's Gemfile:
 gem 'dgw_gallery'
 ```
 
+And then copy and install migrations from dgw_gallery_engine to application:
+```bash
+$ rails app:dgw_gallery_engine:install:migrations
+$ rails db:migrate
+```
+
 And then execute:
 ```bash
-$ rails app:dgw_gallery_engine:install:migrations  # Copy migrations from dgw_gallery_engine to application
-$ rails db:migrate
 $ bundle
 ```
 
