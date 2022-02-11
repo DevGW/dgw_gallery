@@ -45,7 +45,7 @@ class GalleryController < ApplicationController
         gImage.gallery_id = gallery.id
 
         gImage.image.attach(io: File.open(image.path), filename: image.original_filename, content_type: image.content_type)
-        gImage.caption = (caption.blank?)? "ARC Expert Work Example" : caption
+        gImage.caption = (caption.blank?)? " " : caption
         gImage.save
     
         flash[:success] = "Image was successfully added to the gallery"

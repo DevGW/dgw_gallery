@@ -4,9 +4,9 @@ Gem::Specification.new do |spec|
   spec.name          = "dgw_gallery"
   spec.version       = DgwGallery::VERSION
   spec.authors       = ["Dev Ghost Writers"]
-  spec.email         = ["ruby-gems@devgw.com"]
+  spec.email         = ["ruby-gems@devghostwriters.com"]
   spec.summary       = %q{A simple gallery for ruby on rails sites}
-  spec.description   = %q{A simple gallery for ruby on rails sites}
+  spec.description   = %q{(This is a current work in progress so bear with us.) A simple gallery for ruby on rails sites that includes a layout for either a bootstrap carousel or responsive image page.}
   spec.homepage      = "https://github.com/DevGW/dgw_gallery"
   spec.license       = "MIT"
 
