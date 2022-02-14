@@ -56,29 +56,21 @@ If you are using turbolinks and experiencing issues with the carousel not starti
 
 ```erb
 <!-- Code in view.html.erb -->
-<!-- Start Embeded Gallery Area -->
-<% if !@gallery.gallery_images.blank? %>
-    <div id="dgwGalleryIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-        <div class="carousel-inner">
-            <% @gallery.gallery_images.each_with_index do |gi, idx| %>
-                <div  data-bs-interval="5000" class="carousel-item <%= (idx == 0)? "active" : nil %>">
-                    <figure>
-                        <%= image_tag gi.image.variant(resize_to_fill: [900, 500]), class: "img-fluid border-radius-xl" %>
-                    </figure>
-                    <figcaption class="blockquote-footer text-center">
-                        <%= gi.caption %>
-                    </figcaption>
+<div class="row mt-2">
+    <div class="card card-body border-radius-xl col-12 text-black shadow-lg" id="galleryCodeSection">
+        <div class="row justify-content-center align-items-evenly">
+            <div class="col-5 bg-light rounded mx-5 h-100">
+                <div class="card-header mt-3 border-radius-xl bg-transparent position-relative z-index-2  blur-shadow-image dark-shadow">
+                    <%= render 'gallery/carousel' %>
                 </div>
-            <% end %>
+            </div>
         </div>
     </div>
-<% else %>
-    <div class="col-12 text-center">
-        There Are No Slides to Display. Please add some.
-    </div>
-<% end %>
-<!-- End Embeded Gallery Area -->
+</div>
 ```
+
+Customizations can be made in the galler/_carousel.html.erb view if necessary
+
 
 ## Contributing
 If you wish to contribute submit a pull request and detail your changes and comment them in the code as well.
