@@ -24,3 +24,13 @@ namespace :dgw_gallery do
         FileUtils.cp_r source, target
     end
 end
+
+namespace :dgw_gallery do
+    desc "Install Gallery CSS"
+
+    task 'install:css' do
+        source = File.join(DgwGallery::Engine.root, "app", "assets", "stylesheets", "dgw_gallery")
+        target = File.join(Rails.root, "app", "assets", "stylesheets", "dgw_gallery")
+        FileUtils.copy_entry source, target
+    end
+end
