@@ -37,6 +37,15 @@ $ rails dgw_gallery:install:controller      # Install Gallery Controller
 $ rails dgw_gallery:install:css             # Install Gallery CSS
 ```
 
+If you are using turbolinks and experiencing issues with the carousel not starting on initial page load, try adding the following line at the end of your head section either for your main app or for that specific page.
+```html
+<head>
+    ...
+    ...
+    <meta name="turbolinks-visit-control" content="reload">
+</head>
+```
+
 ## Usage
 #### To embed the carousel on your page you will use code similar to this
 ```ruby
