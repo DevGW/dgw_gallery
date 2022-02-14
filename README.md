@@ -32,8 +32,9 @@ $ gem install dgw_gallery
 If you would like to modify the views or override the controller you can install either or both.
 Execute:
 ```bash
-$ rails app:dgw_gallery:install:views           # Install Gallery Views
-$ rails app:dgw_gallery:install:controller      # Install Gallery Controller
+$ rails dgw_gallery:install:views           # Install Gallery Views
+$ rails dgw_gallery:install:controller      # Install Gallery Controller
+$ rails dgw_gallery:install:css             # Install Gallery CSS
 ```
 
 ## Usage
