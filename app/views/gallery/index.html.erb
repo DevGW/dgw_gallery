@@ -32,15 +32,16 @@
                     <div class="row justify-space-between py-2 text-center">
                         <h4 class="text-center">Existing Galleries</h4>
                         <hr class="">
-                        <%= link_to gallery_new_path, class: 'text-end text-info' do %>
+                        <%= link_to gallery_new_path, class: 'text-end text-primary' do %>
                             <span class="mb-5 text-end"><i class="fa fa-plus"></i> New Gallery</span>
                         <% end %>
                         <% @galleries.each do |gallery| %>
                             <div class="col-12 col-md-3 mt-3 mx-auto mb-5 move-on-hover d-flex align-items-stretch" id="<%= gallery.id.to_s %>">
                                 <div class="card border-1 shadow-lg mt-3 border-radius-xl">
                                     <div class="card-header mt-4 mx-3 p-0 bg-transparent position-relative z-index-2">
+                                        <span class="text-black text-sm">Gallery ID: <%= gallery.id.to_s %></span>
                                         <span class="d-block blur-shadow-image">
-                                            <%= image_tag ((!gallery.gallery_images.blank? && gallery.gallery_images.first.image.attached?)? gallery.gallery_images.first.image.variant(resize_to_fill: [300, 300]) : "no_gallery_images.png"), class: "img-fluid border-radius-xl" %>
+                                            <%= image_tag ((!gallery.gallery_images.blank? && gallery.gallery_images.first.image.attached?)? gallery.gallery_images.first.image.variant(resize_to_fill: [300, 300]) : "no_gallery_images.png"), class: "mt-2 img-fluid border-radius-xl" %>
                                         </span>
                                     </div>
                                     <div class="card-body p-1 text-center">

@@ -69,8 +69,9 @@
                                     </figure>
                                 </div>
                                 <div class="col-2">
-                                    <div class="input-group input-group-static mb-2">
-                                        <%= text_field_tag "caption", nil, class: "form-control text-center", placeholder: "Enter caption for image", required: false %><br>
+                                    <div class="form-group input-group-static p-0">
+                                        <label class="mb-2">Image Caption</label>
+                                        <%= text_field_tag "caption", nil, class: "form-control", required: false %><br>
                                     </div>
                                     <p>
                                         <button type="submit" class="w-auto mt-2 btn btn-sm btn-primary">Add to Gallery</button>
