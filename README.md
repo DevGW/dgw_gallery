@@ -69,7 +69,7 @@ If you are using turbolinks and experiencing issues with the carousel not starti
 </div>
 ```
 
-Customizations can be made in the galler/_carousel.html.erb view if necessary
+Customizations can be made in the app/assets/view/gallery/_carousel.html.erb view if necessary (after installing views)
 
 
 ## Contributing
